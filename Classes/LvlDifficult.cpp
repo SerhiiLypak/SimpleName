@@ -41,12 +41,12 @@ bool LvlDifficult::init()
 	
 
 
-	auto easy = MenuItemFont::create("Easy", CC_CALLBACK_1(LvlDifficult::Easy, this));
-	auto hard = MenuItemFont::create("Hard", CC_CALLBACK_1(LvlDifficult::Hard, this));
-	auto insane = MenuItemFont::create("Insane", CC_CALLBACK_1(LvlDifficult::Insane, this));
-	easy->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	auto easy = MenuItemImage::create("Easy.png","EasyClick.png ", CC_CALLBACK_1(LvlDifficult::Easy, this));
+	auto hard = MenuItemImage::create("Hard.png","HardClick.png", CC_CALLBACK_1(LvlDifficult::Hard, this));
+	auto insane = MenuItemImage::create("Insane.png","InsaneClick.png", CC_CALLBACK_1(LvlDifficult::Insane, this));
+	easy->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y+30));
 	hard->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.2 + origin.y));
-	insane->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.4 + origin.y));
+	insane->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.4 + origin.y-30));
 
 	
 

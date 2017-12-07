@@ -42,10 +42,10 @@ bool GameOverScene::init()
     
     this->addChild( backgroundSprite );
     
-    auto retryItem = MenuItemImage::create( "Retry Button.png", "Retry Button Clicked.png", CC_CALLBACK_1( GameOverScene::GoToGameScene, this ) );
+    auto retryItem = MenuItemImage::create( "Retry.png", "RetryClick.png", CC_CALLBACK_1( GameOverScene::GoToGameScene, this ) );
     retryItem->setPosition( Point( visibleSize.width / 2 + origin.x, visibleSize.height / 4 * 3 ) );
     
-    auto mainMenuItem = MenuItemImage::create( "Menu Button.png", "Menu Button Clicked.png", CC_CALLBACK_1( GameOverScene::GoToMainMenuScene, this ) );
+    auto mainMenuItem = MenuItemImage::create( "Menu.png", "MenuClick.png", CC_CALLBACK_1( GameOverScene::GoToMainMenuScene, this ) );
     mainMenuItem->setPosition( Point( visibleSize.width / 2 + origin.x, visibleSize.height / 4 ) );
     
     auto menu = Menu::create( retryItem, mainMenuItem, NULL );

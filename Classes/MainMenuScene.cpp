@@ -39,7 +39,7 @@ bool MainMenuScene::init()
     
 
     
-    auto playItem = MenuItemImage::create( "Play Button.png", "Play Button Clicked.png", CC_CALLBACK_1( MainMenuScene::GoToGameScene, this ) );
+    auto playItem = MenuItemImage::create( "Play.png", "PlayClick.png", CC_CALLBACK_1( MainMenuScene::GoToGameScene, this ) );
     playItem->setPosition( Point( visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y ) );
     
     auto menu = Menu::create( playItem, NULL );
