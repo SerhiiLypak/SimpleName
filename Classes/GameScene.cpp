@@ -57,13 +57,13 @@ bool GameScene::init()
 	bird = new Bird(this);
 	
 	if (newLvl==0) {
-		bird->flappyBird->setScale(0.08);
+		bird->flappyBird->setScale(0.7);
 	}
 	else if (newLvl==1) {
-		bird->flappyBird->setScale(0.13);
+		bird->flappyBird->setScale(0.9);
 	}		
 	else if (newLvl==2) {
-		bird->flappyBird->setScale(0.18);
+		bird->flappyBird->setScale(1.1);
 	}
 
     auto contactListener = EventListenerPhysicsContact::create( );
