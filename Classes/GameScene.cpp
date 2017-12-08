@@ -40,6 +40,8 @@ bool GameScene::init()
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("coin.wav");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("flap.wav");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("dead.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("death.wav");
+
 
     auto backgroundSprite = Sprite::create( "bg.jpg" );
     backgroundSprite->setPosition( Point( visibleSize.width / 2+origin.x , visibleSize.height / 2 +origin.y ) );
@@ -107,7 +109,7 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
     if ( ( BIRD_COLLISION_BITMASK == a->getCollisionBitmask( ) && OBSTACLE_COLLISION_BITMASK == b->getCollisionBitmask() ) || ( BIRD_COLLISION_BITMASK == b->getCollisionBitmask( ) && OBSTACLE_COLLISION_BITMASK == a->getCollisionBitmask() ) )
     {        
         auto scene = GameOverScene::createScene( score,newLvl );
-        
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("dead.wav");
         Director::getInstance( )->replaceScene( TransitionFade::create( TRANSITION_TIME, scene ) );
     }
     else if ( ( BIRD_COLLISION_BITMASK == a->getCollisionBitmask( ) && POINT_COLLISION_BITMASK == b->getCollisionBitmask() ) || ( BIRD_COLLISION_BITMASK == b->getCollisionBitmask( ) && POINT_COLLISION_BITMASK == a->getCollisionBitmask() ) )
@@ -121,6 +123,7 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 	else if ((BIRD_COLLISION_BITMASK == a->getCollisionBitmask() && MINUS_POINT_COLLISION_BITMASK == b->getCollisionBitmask()) || (BIRD_COLLISION_BITMASK == b->getCollisionBitmask() && MINUS_POINT_COLLISION_BITMASK == a->getCollisionBitmask()))
 	{
 		score--;
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("death.wav");
 
 		__String *tempScore = __String::createWithFormat("%i", score);
 
@@ -146,11 +149,12 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event )
 void GameScene::StopFlying( float dt )
 {
     bird->StopFlying( );
+	
 }
 
 void GameScene::update( float dt )
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("dead.wav");
+	
     bird->Fall( );
 	
 }
