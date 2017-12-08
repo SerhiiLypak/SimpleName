@@ -82,7 +82,6 @@ bool GameOverScene::init()
     
     highScoreLabel->setColor( Color3B::YELLOW );
     highScoreLabel->setPosition( Point( visibleSize.width * 0.75 + origin.x, visibleSize.height / 2 + origin.y ) );
-
     this->addChild( highScoreLabel );
     
     return true;
