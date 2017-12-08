@@ -2,6 +2,7 @@
 #include "Definitions.h"
 #include "GameScene.h"
 #include "LvlDifficult.h"
+#include "Authors.h"
 USING_NS_CC;
 
 Scene* MainMenuScene::createScene()
@@ -40,9 +41,12 @@ bool MainMenuScene::init()
 
     
     auto playItem = MenuItemImage::create( "Play.png", "PlayClick.png", CC_CALLBACK_1( MainMenuScene::GoToGameScene, this ) );
+	auto authors = MenuItemImage::create("Ball.png"," ", CC_CALLBACK_1(MainMenuScene::GoToAuthors, this));
     playItem->setPosition( Point( visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y ) );
-    
-    auto menu = Menu::create( playItem, NULL );
+	authors->setPosition(Point(visibleSize.width , 0 ));
+	authors->setAnchorPoint(Vec2(1, 0));
+	authors->setScale(2);
+    auto menu = Menu::create( playItem, authors,NULL );
     menu->setPosition( Point::ZERO );
     
     this->addChild( menu );
@@ -56,6 +60,13 @@ void MainMenuScene::GoToGameScene( cocos2d::Ref *sender )
     
     Director::getInstance( )->replaceScene( TransitionFade::create( TRANSITION_TIME, scene ) );
 }
+void MainMenuScene::GoToAuthors(cocos2d::Ref *sender)
+{
+	auto scene = Authors::createScene();
+
+	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
+}
+
 
 
 

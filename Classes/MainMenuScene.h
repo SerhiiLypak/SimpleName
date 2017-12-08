@@ -17,6 +17,7 @@ public:
     
 private:
     void GoToGameScene( cocos2d::Ref *sender );
+	void GoToAuthors(cocos2d::Ref *sender);
     
 };
 

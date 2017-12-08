@@ -36,11 +36,6 @@ bool LvlDifficult::init()
 
 	this->addChild(backgroundSprite);
 
-
-
-	
-
-
 	auto easy = MenuItemImage::create("Easy.png","EasyClick.png ", CC_CALLBACK_1(LvlDifficult::Easy, this));
 	auto hard = MenuItemImage::create("Hard.png","HardClick.png", CC_CALLBACK_1(LvlDifficult::Hard, this));
 	auto insane = MenuItemImage::create("Insane.png","InsaneClick.png", CC_CALLBACK_1(LvlDifficult::Insane, this));
@@ -49,7 +44,6 @@ bool LvlDifficult::init()
 	insane->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.4 + origin.y-30));
 
 	
-
 
 	auto menu = Menu::create(easy, hard, insane,  NULL);
 	menu->setPosition(Point::ZERO);
