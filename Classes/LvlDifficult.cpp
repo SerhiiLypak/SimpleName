@@ -31,14 +31,14 @@ bool LvlDifficult::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto backgroundSprite = Sprite::create("bg.jpg");
+	auto backgroundSprite = Sprite::create("Backgrounds/bg.jpg");
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
 	this->addChild(backgroundSprite);
 
-	auto easy = MenuItemImage::create("Easy.png","EasyClick.png ", CC_CALLBACK_1(LvlDifficult::Easy, this));
-	auto hard = MenuItemImage::create("Hard.png","HardClick.png", CC_CALLBACK_1(LvlDifficult::Hard, this));
-	auto insane = MenuItemImage::create("Insane.png","InsaneClick.png", CC_CALLBACK_1(LvlDifficult::Insane, this));
+	auto easy = MenuItemImage::create("Buttons/Easy.png","Buttons/EasyClick.png ", CC_CALLBACK_1(LvlDifficult::Easy, this));
+	auto hard = MenuItemImage::create("Buttons/Hard.png","Buttons/HardClick.png", CC_CALLBACK_1(LvlDifficult::Hard, this));
+	auto insane = MenuItemImage::create("Buttons/Insane.png","Buttons/InsaneClick.png", CC_CALLBACK_1(LvlDifficult::Insane, this));
 	easy->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y+30));
 	hard->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.2 + origin.y));
 	insane->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.4 + origin.y-30));

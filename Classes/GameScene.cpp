@@ -10,7 +10,7 @@ Scene* GameScene::createScene(unsigned int lvl)
 	//scores = lvl;
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics( );
-  //  scene->getPhysicsWorld( )->setDebugDrawMask( PhysicsWorld::DEBUGDRAW_ALL );
+   // scene->getPhysicsWorld( )->setDebugDrawMask( PhysicsWorld::DEBUGDRAW_ALL );
     scene->getPhysicsWorld( )->setGravity( Vect( 0, 0 ) );
     
     // 'layer' is an autorelease object
@@ -36,14 +36,13 @@ bool GameScene::init()
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/Flappy.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/coin.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/dead.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/LostPoint.wav");
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("coin.wav");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("flap.wav");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("dead.wav");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("death.wav");
 
-
-    auto backgroundSprite = Sprite::create( "bg.jpg" );
+    auto backgroundSprite = Sprite::create( "Backgrounds/bg.jpg" );
     backgroundSprite->setPosition( Point( visibleSize.width / 2+origin.x , visibleSize.height / 2 +origin.y ) );
 
     this->addChild( backgroundSprite );
@@ -109,13 +108,13 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
     if ( ( BIRD_COLLISION_BITMASK == a->getCollisionBitmask( ) && OBSTACLE_COLLISION_BITMASK == b->getCollisionBitmask() ) || ( BIRD_COLLISION_BITMASK == b->getCollisionBitmask( ) && OBSTACLE_COLLISION_BITMASK == a->getCollisionBitmask() ) )
     {        
         auto scene = GameOverScene::createScene( score,newLvl );
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("dead.wav");
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/dead.wav");
         Director::getInstance( )->replaceScene( TransitionFade::create( TRANSITION_TIME, scene ) );
     }
     else if ( ( BIRD_COLLISION_BITMASK == a->getCollisionBitmask( ) && POINT_COLLISION_BITMASK == b->getCollisionBitmask() ) || ( BIRD_COLLISION_BITMASK == b->getCollisionBitmask( ) && POINT_COLLISION_BITMASK == a->getCollisionBitmask() ) )
     {
         score++;
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("coin.wav");
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/coin.wav");
         __String *tempScore = __String::createWithFormat( "%i", score );
         
         scoreLabel->setString( tempScore->getCString( ) );
@@ -123,8 +122,8 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 	else if ((BIRD_COLLISION_BITMASK == a->getCollisionBitmask() && MINUS_POINT_COLLISION_BITMASK == b->getCollisionBitmask()) || (BIRD_COLLISION_BITMASK == b->getCollisionBitmask() && MINUS_POINT_COLLISION_BITMASK == a->getCollisionBitmask()))
 	{
 		score--;
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("death.wav");
-
+	
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/LostPoint.wav");
 		__String *tempScore = __String::createWithFormat("%i", score);
 
 		scoreLabel->setString(tempScore->getCString());
@@ -140,9 +139,9 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event )
 {
     bird->Fly( );
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/Flappy.wav");
     this->scheduleOnce( schedule_selector( GameScene::StopFlying ), BIRD_FLY_DURATION );
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("flap.wav");
+	
     return true;
 }
 

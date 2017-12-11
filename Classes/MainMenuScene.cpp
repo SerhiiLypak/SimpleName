@@ -33,19 +33,19 @@ bool MainMenuScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto backgroundSprite = Sprite::create( "bg.jpg" );
+    auto backgroundSprite = Sprite::create( "Backgrounds/bg.jpg" );
     backgroundSprite->setPosition( Point( visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y ) );
     
     this->addChild( backgroundSprite );
     
 
     
-    auto playItem = MenuItemImage::create( "Play.png", "PlayClick.png", CC_CALLBACK_1( MainMenuScene::GoToGameScene, this ) );
-	auto authors = MenuItemImage::create("Ball.png"," ", CC_CALLBACK_1(MainMenuScene::GoToAuthors, this));
+    auto playItem = MenuItemImage::create( "Buttons/Play.png", "Buttons/PlayClick.png", CC_CALLBACK_1( MainMenuScene::GoToGameScene, this ) );
+	auto authors = MenuItemImage::create("Buttons/Info.png"," ", CC_CALLBACK_1(MainMenuScene::GoToAuthors, this));
     playItem->setPosition( Point( visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y ) );
 	authors->setPosition(Point(visibleSize.width , 0 ));
 	authors->setAnchorPoint(Vec2(1, 0));
-	authors->setScale(2);
+	authors->setScale(0.5);
     auto menu = Menu::create( playItem, authors,NULL );
     menu->setPosition( Point::ZERO );
     
