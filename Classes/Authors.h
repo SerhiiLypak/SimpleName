@@ -14,7 +14,8 @@ public:
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(Authors);
-
+private:
+	bool backToMainMenu(cocos2d::Touch *touch, cocos2d::Event *event);
 };
 
 #endif // __GAME_SCENE_H__

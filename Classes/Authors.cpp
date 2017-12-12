@@ -1,5 +1,6 @@
 #include "Authors.h"
-
+#include "MainMenuScene.h"
+#include "Definitions.h"
 USING_NS_CC;
 
 Scene* Authors::createScene()
@@ -66,5 +67,16 @@ bool Authors::init()
 	authors->runAction(move);
 	this->addChild(authors);
 
+	auto listener1 = EventListenerTouchOneByOne::create();
+	listener1->setSwallowTouches(true);
+	listener1->onTouchBegan = CC_CALLBACK_2(Authors::backToMainMenu, this);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener1, this);
+
+	return true;
+}
+bool Authors::backToMainMenu(cocos2d::Touch *touch, cocos2d::Event *event) {
+	auto scene = MainMenuScene::createScene();
+
+	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 	return true;
 }
