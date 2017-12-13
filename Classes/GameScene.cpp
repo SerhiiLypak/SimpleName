@@ -98,6 +98,7 @@ bool GameScene::init()
 void GameScene::SpawnPipe( float dt )
 {
     pipe.SpawnPipe( this );
+	pipe.DeletePipe( this );
 }
 
 bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
@@ -122,13 +123,13 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 	else if ((BIRD_COLLISION_BITMASK == a->getCollisionBitmask() && MINUS_POINT_COLLISION_BITMASK == b->getCollisionBitmask()) || (BIRD_COLLISION_BITMASK == b->getCollisionBitmask() && MINUS_POINT_COLLISION_BITMASK == a->getCollisionBitmask()))
 	{
 		score--;
-	
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/LostPoint.wav");
 		__String *tempScore = __String::createWithFormat("%i", score);
 
 		scoreLabel->setString(tempScore->getCString());
 	}
 	if (score == -1) {
+		score = 0;
 		auto scene = GameOverScene::createScene(score,newLvl);
 
 		Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));

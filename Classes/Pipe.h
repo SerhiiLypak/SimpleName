@@ -9,11 +9,10 @@ public:
     Pipe();
     
     void SpawnPipe( cocos2d::Layer *layer );
-    
+	void DeletePipe( cocos2d::Layer *layer );
 private:
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
-    
 };
 
 #endif // __PIPE_H__

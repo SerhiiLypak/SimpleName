@@ -18,8 +18,8 @@ void Pipe::SpawnPipe( cocos2d::Layer *layer )
 
     auto topPipeBody = PhysicsBody::createBox( topPipe->getContentSize( ) );
     auto bottomPipeBody = PhysicsBody::createBox( bottomPipe->getContentSize( ) );
-	//auto pointPipeBody = PhysicsBody::createBox( pointPipe->getContentSize());
-
+	topPipeBody->setTag(1);
+	bottomPipeBody->setTag(2);
     auto random = CCRANDOM_0_1( );
     
     if ( random < LOWER_SCREEN_PIPE_THRESHOLD )
@@ -35,7 +35,7 @@ void Pipe::SpawnPipe( cocos2d::Layer *layer )
     
     topPipeBody->setDynamic( false );
     bottomPipeBody->setDynamic( false );
-	//pointPipeBody->setDynamic(false);
+	
     topPipeBody->setCollisionBitmask( OBSTACLE_COLLISION_BITMASK );
     bottomPipeBody->setCollisionBitmask( OBSTACLE_COLLISION_BITMASK );
     topPipeBody->setContactTestBitmask( true );
@@ -111,9 +111,11 @@ void Pipe::SpawnPipe( cocos2d::Layer *layer )
     auto pointNodeAction = MoveBy::create( PIPE_MOVEMENT_SPEED * visibleSize.width, Point( -visibleSize.width * 1.5, 0 ) );
 //	topPointNode->runAction(pointNodeAction);
     pointNode->runAction( pointNodeAction );
-	
 }
-
+void Pipe::DeletePipe(cocos2d::Layer *layer) {
+	layer->removeChildByTag(1);
+	layer->removeChildByTag(2);
+}
 
 
 
